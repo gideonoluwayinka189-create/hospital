@@ -1,0 +1,1724 @@
+/* =========================================================
+   UNIQUE HOSPITAL
+   Main CSS
+   Cream + Green Professional Hospital Theme
+========================================================= */
+
+
+/* =========================================================
+   1. ROOT VARIABLES
+========================================================= */
+
+:root {
+    --primary-green: #176b4d;
+    --dark-green: #0d4935;
+    --light-green: #e5f1ea;
+    --cream: #fbf8ef;
+    --cream-dark: #f3eee1;
+    --white: #ffffff;
+    --text-dark: #18332a;
+    --text: #53655d;
+    --border: #dce6df;
+    --shadow: 0 15px 45px rgba(13, 73, 53, 0.10);
+    --shadow-small: 0 8px 25px rgba(13, 73, 53, 0.08);
+    --radius: 18px;
+    --transition: 0.3s ease;
+}
+
+
+/* =========================================================
+   2. RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   3. CONTAINER
+========================================================= */
+
+.container {
+    width: min(1150px, 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   4. HEADER / NAVIGATION
+========================================================= */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(251, 248, 239, 0.96);
+    border-bottom: 1px solid rgba(23, 107, 77, 0.10);
+    backdrop-filter: blur(12px);
+}
+
+.nav-container {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--dark-green);
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+    background: var(--primary-green);
+    color: var(--white);
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    box-shadow: var(--shadow-small);
+}
+
+.logo span:last-child {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo strong {
+    font-size: 19px;
+    letter-spacing: -0.5px;
+}
+
+.logo small {
+    font-size: 11px;
+    color: var(--primary-green);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+/* NAVIGATION */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+.navbar a {
+    position: relative;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 0;
+    transition: var(--transition);
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 10px;
+    background: var(--primary-green);
+    transition: var(--transition);
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--primary-green);
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+    width: 100%;
+}
+
+
+/* NAV BUTTON */
+
+.nav-button {
+    background: var(--primary-green);
+    color: var(--white);
+    padding: 12px 19px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.nav-button:hover {
+    background: var(--dark-green);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(23, 107, 77, 0.20);
+}
+
+
+/* MOBILE MENU BUTTON */
+
+.menu-button {
+    display: none;
+    width: 43px;
+    height: 43px;
+    border: none;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--primary-green);
+    font-size: 25px;
+}
+
+
+/* =========================================================
+   5. HERO SECTION
+========================================================= */
+
+.hero {
+    position: relative;
+    padding: 90px 0 100px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(23, 107, 77, 0.08), transparent 30%),
+        var(--cream);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(23, 107, 77, 0.04);
+    top: -150px;
+    left: -150px;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 70px;
+}
+
+
+/* HERO CONTENT */
+
+.hero-tag,
+.section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary-green);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.hero-tag {
+    padding: 8px 13px;
+    background: var(--light-green);
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    color: var(--dark-green);
+    font-size: clamp(42px, 5vw, 67px);
+    line-height: 1.08;
+    letter-spacing: -2.5px;
+    margin-bottom: 23px;
+}
+
+.hero h1 span,
+.about-content h2 span,
+.section-heading h2 span,
+.why-content h2 span,
+.appointment-content h2 span,
+.contact-content h2 span {
+    color: var(--primary-green);
+}
+
+.hero-content > p {
+    max-width: 590px;
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 30px;
+}
+
+
+/* HERO BUTTONS */
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-bottom: 35px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 23px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--primary-green);
+    color: var(--white);
+    box-shadow: 0 9px 25px rgba(23, 107, 77, 0.18);
+}
+
+.btn-primary:hover {
+    background: var(--dark-green);
+    transform: translateY(-3px);
+    box-shadow: 0 13px 30px rgba(23, 107, 77, 0.25);
+}
+
+.btn-outline {
+    color: var(--primary-green);
+    border: 1.5px solid var(--primary-green);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    color: var(--white);
+    background: var(--primary-green);
+    transform: translateY(-3px);
+}
+
+
+/* HERO INFO */
+
+.hero-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+.hero-info > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-info i {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--primary-green);
+    display: grid;
+    place-items: center;
+}
+
+.hero-info span {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.hero-info strong {
+    color: var(--text-dark);
+    font-size: 13px;
+}
+
+
+/* HERO IMAGE */
+
+.hero-image {
+    position: relative;
+    min-height: 510px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-card {
+    width: 88%;
+    height: 460px;
+    background: var(--light-green);
+    border-radius: 120px 30px 30px 30px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    transform: rotate(2deg);
+}
+
+.doctor-placeholder {
+    height: 100%;
+    border-radius: 105px 22px 22px 22px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(23, 107, 77, 0.18),
+            rgba(251, 248, 239, 0.85)
+        );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--primary-green);
+    text-align: center;
+}
+
+.doctor-placeholder i {
+    font-size: 105px;
+    margin-bottom: 15px;
+}
+
+.doctor-placeholder p {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* FLOATING CARD */
+
+.floating-card {
+    position: absolute;
+    left: 0;
+    bottom: 55px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--white);
+    padding: 14px 20px 14px 14px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    animation: floatCard 3s ease-in-out infinite;
+}
+
+.floating-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: var(--primary-green);
+    color: var(--white);
+    display: grid;
+    place-items: center;
+}
+
+.floating-card div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.floating-card strong {
+    color: var(--dark-green);
+    font-size: 13px;
+}
+
+.floating-card span {
+    color: var(--text);
+    font-size: 11px;
+}
+
+@keyframes floatCard {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================================================
+   6. QUICK SERVICES
+========================================================= */
+
+.quick-services {
+    position: relative;
+    z-index: 5;
+    margin-top: -25px;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.quick-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 27px 25px;
+    border-right: 1px solid var(--border);
+}
+
+.quick-card:last-child {
+    border-right: none;
+}
+
+.quick-card > i {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: var(--light-green);
+    color: var(--primary-green);
+    font-size: 21px;
+}
+
+.quick-card h3 {
+    color: var(--dark-green);
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.quick-card p {
+    color: var(--text);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   7. GENERAL SECTION
+========================================================= */
+
+.section {
+    padding: 100px 0;
+}
+
+.section-heading {
+    max-width: 680px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    color: var(--dark-green);
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin: 12px 0 14px;
+}
+
+.section-heading p {
+    color: var(--text);
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   8. ABOUT
+========================================================= */
+
+.about {
+    background: var(--white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 75px;
+}
+
+.about-image {
+    min-height: 480px;
+    background: var(--light-green);
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-image::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border: 40px solid rgba(23, 107, 77, 0.10);
+    border-radius: 50%;
+    top: -100px;
+    right: -80px;
+}
+
+.about-image::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(251, 248, 239, 0.6);
+    bottom: -70px;
+    left: -70px;
+}
+
+.about-box {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    padding: 45px 25px;
+    text-align: center;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.about-box i {
+    font-size: 55px;
+    color: var(--primary-green);
+    margin-bottom: 15px;
+}
+
+.about-box h3 {
+    color: var(--dark-green);
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.about-box p {
+    font-size: 13px;
+}
+
+.about-content h2 {
+    color: var(--dark-green);
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.15;
+    margin: 13px 0 20px;
+}
+
+.about-content > p {
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.about-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 25px 0 30px;
+}
+
+.about-list div {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-dark);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.about-list i {
+    color: var(--primary-green);
+}
+
+
+/* =========================================================
+   9. SERVICES
+========================================================= */
+
+.services {
+    background: var(--cream);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.service-card {
+    background: var(--white);
+    border: 1px solid rgba(23, 107, 77, 0.08);
+    border-radius: var(--radius);
+    padding: 30px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--light-green);
+    top: -40px;
+    right: -35px;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow);
+    border-color: transparent;
+}
+
+.service-card:hover::before {
+    transform: scale(1.5);
+}
+
+.service-icon {
+    position: relative;
+    z-index: 1;
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    background: var(--light-green);
+    color: var(--primary-green);
+    border-radius: 15px;
+    font-size: 24px;
+    margin-bottom: 22px;
+}
+
+.service-card h3 {
+    color: var(--dark-green);
+    font-size: 18px;
+    margin-bottom: 9px;
+}
+
+.service-card p {
+    font-size: 13px;
+    margin-bottom: 17px;
+}
+
+.service-card a {
+    color: var(--primary-green);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.service-card a i {
+    margin-left: 4px;
+    transition: var(--transition);
+}
+
+.service-card a:hover i {
+    margin-left: 9px;
+}
+
+
+/* =========================================================
+   10. WHY US
+========================================================= */
+
+.why-us {
+    background: var(--white);
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.why-content h2 {
+    color: var(--dark-green);
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.15;
+    margin: 12px 0 17px;
+}
+
+.why-content > p {
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+.why-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.why-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: var(--light-green);
+    color: var(--primary-green);
+    border-radius: 13px;
+    font-size: 19px;
+}
+
+.why-item h3 {
+    color: var(--dark-green);
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.why-item p {
+    font-size: 13px;
+}
+
+.why-card {
+    min-height: 410px;
+    padding: 50px;
+    border-radius: 30px;
+    background: var(--primary-green);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.why-card::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border: 50px solid rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+    top: -100px;
+    right: -90px;
+}
+
+.why-card::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    bottom: -80px;
+    left: -60px;
+}
+
+.why-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.why-card > i {
+    font-size: 45px;
+    margin-bottom: 25px;
+}
+
+.why-card h3 {
+    font-size: 28px;
+    line-height: 1.15;
+}
+
+.why-card p {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   11. DOCTORS
+========================================================= */
+
+.doctors {
+    background: var(--cream);
+}
+
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.doctor-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(13, 73, 53, 0.05);
+    transition: var(--transition);
+}
+
+.doctor-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+}
+
+.doctor-photo {
+    height: 270px;
+    background:
+        linear-gradient(
+            145deg,
+            var(--light-green),
+            var(--cream-dark)
+        );
+    display: grid;
+    place-items: center;
+    color: var(--primary-green);
+}
+
+.doctor-photo i {
+    font-size: 130px;
+}
+
+.doctor-info {
+    padding: 22px;
+    text-align: center;
+}
+
+.doctor-info h3 {
+    color: var(--dark-green);
+    font-size: 17px;
+    margin-bottom: 3px;
+}
+
+.doctor-info p {
+    color: var(--primary-green);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   12. APPOINTMENT
+========================================================= */
+
+.appointment {
+    background: var(--white);
+}
+
+.appointment-container {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.appointment-content {
+    padding-top: 25px;
+}
+
+.appointment-content h2 {
+    color: var(--dark-green);
+    font-size: clamp(31px, 4vw, 46px);
+    line-height: 1.15;
+    margin: 12px 0 18px;
+}
+
+.appointment-content > p {
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.appointment-contact {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.appointment-contact > i {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--primary-green);
+    display: grid;
+    place-items: center;
+}
+
+.appointment-contact div {
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-contact span {
+    font-size: 11px;
+}
+
+.appointment-contact strong {
+    color: var(--dark-green);
+}
+
+
+/* FORMS */
+
+.appointment-form,
+.contact-form {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: var(--shadow-small);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--dark-green);
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text-dark);
+    padding: 13px 15px;
+    border-radius: 11px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9ba9a2;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(23, 107, 77, 0.08);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.appointment-form .btn,
+.contact-form .btn {
+    width: 100%;
+}
+
+
+/* =========================================================
+   13. FAQ
+========================================================= */
+
+.faq {
+    background: var(--cream);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.faq-item.active {
+    border-color: rgba(23, 107, 77, 0.25);
+    box-shadow: var(--shadow-small);
+}
+
+.faq-question {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 20px 22px;
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.faq-question i {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--primary-green);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.faq-answer p {
+    padding: 0 22px 20px;
+    font-size: 13px;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 250px;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(45deg);
+    background: var(--primary-green);
+    color: var(--white);
+}
+
+
+/* =========================================================
+   14. CONTACT
+========================================================= */
+
+.contact {
+    background: var(--white);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.contact-content {
+    padding-top: 20px;
+}
+
+.contact-content h2 {
+    color: var(--dark-green);
+    font-size: clamp(31px, 4vw, 46px);
+    line-height: 1.15;
+    margin: 12px 0 18px;
+}
+
+.contact-content > p {
+    font-size: 15px;
+    margin-bottom: 32px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 23px;
+}
+
+.contact-item > i {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--light-green);
+    color: var(--primary-green);
+}
+
+.contact-item strong {
+    color: var(--dark-green);
+    display: block;
+    font-size: 14px;
+}
+
+.contact-item p {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   15. FOOTER
+========================================================= */
+
+.footer {
+    background: var(--dark-green);
+    color: rgba(255, 255, 255, 0.70);
+    padding-top: 70px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 0.9fr 1.1fr;
+    gap: 45px;
+    padding-bottom: 55px;
+}
+
+.footer-logo {
+    color: var(--white);
+    margin-bottom: 18px;
+}
+
+.footer-logo small {
+    color: #b6d9c8;
+}
+
+.footer-about > p {
+    max-width: 330px;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.social-links {
+    display: flex;
+    gap: 9px;
+    margin-top: 22px;
+}
+
+.social-links a {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background: var(--white);
+    color: var(--primary-green);
+    transform: translateY(-3px);
+}
+
+.footer-links h3 {
+    color: var(--white);
+    font-size: 15px;
+    margin-bottom: 18px;
+}
+
+.footer-links a {
+    display: block;
+    width: fit-content;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 12px;
+    margin-bottom: 10px;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    transform: translateX(4px);
+}
+
+.footer-links p {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.footer-links p i {
+    color: #b6d9c8;
+    margin-top: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    padding: 20px 5%;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================================================
+   16. SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-green);
+}
+
+
+/* =========================================================
+   17. TEXT SELECTION
+========================================================= */
+
+::selection {
+    background: var(--primary-green);
+    color: var(--white);
+}
+
+
+/* =========================================================
+   18. MOBILE RESPONSIVENESS
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        gap: 15px;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    .hero-container {
+        gap: 40px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .about-grid,
+    .why-grid,
+    .appointment-container,
+    .contact-grid {
+        gap: 40px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   19. TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .nav-container {
+        min-height: 72px;
+    }
+
+    .menu-button {
+        display: grid;
+        place-items: center;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 72px;
+        left: 4%;
+        right: 4%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition);
+    }
+
+    .navbar.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .navbar a {
+        padding: 13px 15px;
+        border-radius: 8px;
+    }
+
+    .navbar a:hover {
+        background: var(--light-green);
+    }
+
+    .navbar a::after {
+        display: none;
+    }
+
+    .hero {
+        padding: 70px 0 80px;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-content > p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-info {
+        justify-content: center;
+    }
+
+    .hero-image {
+        min-height: 450px;
+        margin-top: 20px;
+    }
+
+    .image-card {
+        width: 75%;
+        height: 410px;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .quick-card:last-child {
+        border-bottom: none;
+    }
+
+    .about-grid,
+    .why-grid,
+    .appointment-container,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-image {
+        min-height: 400px;
+    }
+
+    .why-card {
+        min-height: 350px;
+    }
+
+    .appointment-content,
+    .contact-content {
+        padding-top: 0;
+    }
+
+    .doctors-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   20. MOBILE PHONE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 90%;
+    }
+
+    .section {
+        padding: 70px 0;
+    }
+
+    .logo strong {
+        font-size: 17px;
+    }
+
+    .logo-icon {
+        width: 41px;
+        height: 41px;
+    }
+
+    .hero {
+        padding: 55px 0 65px;
+    }
+
+    .hero h1 {
+        font-size: 39px;
+        letter-spacing: -1.5px;
+    }
+
+    .hero-content > p {
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .hero-info {
+        flex-direction: column;
+        align-items: flex-start;
+        width: fit-content;
+        margin: 0 auto;
+        gap: 15px;
+    }
+
+    .hero-image {
+        min-height: 360px;
+    }
+
+    .image-card {
+        width: 90%;
+        height: 340px;
+        border-radius: 80px 25px 25px 25px;
+    }
+
+    .doctor-placeholder {
+        border-radius: 70px 18px 18px 18px;
+    }
+
+    .doctor-placeholder i {
+        font-size: 75px;
+    }
+
+    .floating-card {
+        left: 0;
+        bottom: 25px;
+        padding: 10px 14px 10px 10px;
+    }
+
+    .floating-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .quick-services {
+        margin-top: 0;
+        padding-top: 15px;
+    }
+
+    .quick-card {
+        padding: 20px;
+    }
+
+    .section-heading {
+        margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+        font-size: 31px;
+    }
+
+    .about-grid {
+        gap: 35px;
+    }
+
+    .about-image {
+        min-height: 330px;
+    }
+
+    .about-box {
+        width: 82%;
+        padding: 30px 18px;
+    }
+
+    .about-box i {
+        font-size: 42px;
+    }
+
+    .about-list {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 25px;
+    }
+
+    .why-card {
+        padding: 35px 27px;
+    }
+
+    .why-card h3 {
+        font-size: 25px;
+    }
+
+    .doctors-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-photo {
+        height: 300px;
+    }
+
+    .appointment-form,
+    .contact-form {
+        padding: 23px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .faq-question {
+        padding: 17px;
+        gap: 12px;
+        font-size: 13px;
+    }
+
+    .faq-answer p {
+        padding: 0 17px 17px;
+    }
+
+    .footer {
+        padding-top: 55px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-bottom: 40px;
+    }
+
+    .footer-about > p {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================================
+   21. VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero-tag {
+        font-size: 10px;
+    }
+
+    .hero-info {
+        width: 100%;
+    }
+
+    .about-content h2,
+    .why-content h2,
+    .appointment-content h2,
+    .contact-content h2 {
+        font-size: 30px;
+    }
+
+    .doctor-photo {
+        height: 260px;
+    }
+}
+
+
+/* =========================================================
+   22. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
