@@ -18,13 +18,9 @@ COPY . .
 ENV DEBUG=False
 ENV PYTHONUNBUFFERED=1
 
-# Collect static files - with error handling
-RUN mkdir -p staticfiles && \
-    echo "Starting collectstatic..." && \
-    python manage.py collectstatic --noinput --verbosity 3 2>&1 || true && \
-    echo "collectstatic completed" && \
-    echo "Listing staticfiles directory:" && \
-    ls -lah staticfiles/ || echo "staticfiles directory empty or not found"
+# Make the collect-static script executable and run it
+COPY collect-static.sh /app/collect-static.sh
+RUN chmod +x /app/collect-static.sh && /app/collect-static.sh
 
 # Expose port
 EXPOSE 8080

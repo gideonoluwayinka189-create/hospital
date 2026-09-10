@@ -24,9 +24,8 @@ urlpatterns = [
     path('', include('UNIQUE.urls')),
 ]
 
-# Serve static and media files
+# Serve media files during development only
+# Static files are served by WhiteNoise middleware in production
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# Always serve static files in production via WhiteNoise + URL patterns
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
