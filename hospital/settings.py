@@ -28,11 +28,14 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'hospital-production-446a.up.railway.app',
+    '.up.railway.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8002',
     'http://127.0.0.1:8002',
+    'https://hospital-production-446a.up.railway.app',
 ]
 
 
