@@ -60,6 +60,108 @@
             color: #0b5ed7;
             text-decoration: underline;
         }
+
+        /* Service Modal Styles */
+        .service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .service-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #0d6efd;
+            cursor: pointer;
+            padding: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: #0b5ed7;
+        }
+
+        #modal-title {
+            color: #0d6efd;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            margin-right: 2rem;
+        }
+
+        #modal-body {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            #modal-title {
+                font-size: 1.5rem;
+            }
+
+            #modal-body {
+                font-size: 0.95rem;
+            }
+        }
     </style>
 </head>
 
@@ -405,7 +507,7 @@
                     Professional medical consultation,
                     diagnosis and treatment.
                 </p>
-                <a href="#">Learn More <i class="bi bi-arrow-right"></i></a>
+                <a href="#" class="learn-more-btn" data-service="general-medicine">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
 
             <div class="service-card">
@@ -417,7 +519,7 @@
                     Fast and reliable medical attention
                     for emergency situations.
                 </p>
-                <a href="#">Learn More <i class="bi bi-arrow-right"></i></a>
+                <a href="#" class="learn-more-btn" data-service="emergency-care">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
 
             <div class="service-card">
@@ -429,7 +531,7 @@
                     Access to quality medications and
                     professional pharmaceutical services.
                 </p>
-                <a href="#">Learn More <i class="bi bi-arrow-right"></i></a>
+                <a href="#" class="learn-more-btn" data-service="pharmacy">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
 
             <div class="service-card">
@@ -441,7 +543,7 @@
                     Reliable laboratory testing to support
                     accurate medical diagnosis.
                 </p>
-                <a href="#">Learn More <i class="bi bi-arrow-right"></i></a>
+                <a href="#" class="learn-more-btn" data-service="laboratory">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
 
             <div class="service-card">
@@ -453,7 +555,7 @@
                     Comprehensive healthcare services
                     for individuals and families.
                 </p>
-                <a href="#">Learn More <i class="bi bi-arrow-right"></i></a>
+                <a href="#" class="learn-more-btn" data-service="family-care">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
 
             <div class="service-card">
@@ -465,7 +567,7 @@
                     Specialist medical services provided
                     by experienced professionals.
                 </p>
-                <a href="#">Learn More <i class="bi bi-arrow-right"></i></a>
+                <a href="#" class="learn-more-btn" data-service="specialist-care">Learn More <i class="bi bi-arrow-right"></i></a>
             </div>
 
         </div>
@@ -1250,7 +1352,71 @@
         }
     }
 
+    /* Service Modal */
+    const serviceContent = {
+        'general-medicine': {
+            title: 'General Medicine',
+            body: 'Our General Medicine department provides comprehensive medical care for a wide range of health conditions. Our experienced physicians offer professional consultation, accurate diagnosis, and effective treatment plans tailored to your individual needs. We handle acute and chronic conditions, manage preventive care, and coordinate specialist referrals when necessary. Our goal is to maintain your overall health and well-being through evidence-based medical practice.'
+        },
+        'emergency-care': {
+            title: 'Emergency Care',
+            body: 'Available 24/7, our Emergency Care department is equipped with advanced medical technology and staffed with highly trained emergency physicians and nurses. We provide immediate medical attention for life-threatening conditions, severe injuries, acute illnesses, and medical emergencies. Our rapid response protocols and comprehensive facilities ensure that you receive the fastest and most appropriate care when every minute counts.'
+        },
+        'pharmacy': {
+            title: 'Pharmacy Services',
+            body: 'Our state-of-the-art pharmacy provides a comprehensive range of medications and professional pharmaceutical services. Our licensed pharmacists are available to counsel you on proper medication use, potential drug interactions, and side effects. We offer both prescription and over-the-counter medications, ensuring quality, authenticity, and affordability. We also provide medication delivery services for patient convenience.'
+        },
+        'laboratory': {
+            title: 'Laboratory Services',
+            body: 'Our modern laboratory facility utilizes advanced diagnostic equipment and techniques to provide accurate and timely test results. We perform a comprehensive range of tests including blood work, urinalysis, pathology, and other diagnostic examinations. Our certified laboratory technicians ensure quality samples and precise analysis. Results are typically available quickly, supporting rapid diagnosis and effective treatment decisions.'
+        },
+        'family-care': {
+            title: 'Family Care',
+            body: 'We provide comprehensive healthcare services for all family members, from children to elderly patients. Our family medicine specialists offer preventive care, management of chronic diseases, health education, and coordination of specialized care when needed. We believe in treating the whole person and building long-term relationships with our patients to ensure optimal health outcomes for entire families.'
+        },
+        'specialist-care': {
+            title: 'Specialist Care',
+            body: 'Our network of experienced medical specialists provides advanced care in various medical fields including cardiology, neurology, orthopedics, gastroenterology, and many others. Each specialist brings years of expertise and access to the latest medical technologies and treatment options. We ensure seamless coordination between specialists and your primary care physician for comprehensive and integrated treatment.'
+        }
+    };
+
+    // Service Modal Event Listeners
+    const modal = document.getElementById('service-modal');
+    const modalClose = document.querySelector('.modal-close');
+    const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
+
+    learnMoreBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const serviceKey = this.dataset.service;
+            if (serviceContent[serviceKey]) {
+                document.getElementById('modal-title').textContent = serviceContent[serviceKey].title;
+                document.getElementById('modal-body').textContent = serviceContent[serviceKey].body;
+                modal.classList.add('active');
+            }
+        });
+    });
+
+    modalClose.addEventListener('click', function() {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
 </script>
+
+    <!-- Service Modal -->
+    <div id="service-modal" class="service-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 id="modal-title"></h2>
+            <div id="modal-body"></div>
+        </div>
+    </div>
 
 </body>
 </html>
