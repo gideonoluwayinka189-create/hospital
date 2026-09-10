@@ -1385,27 +1385,42 @@
     const modalClose = document.querySelector('.modal-close');
     const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
 
-    learnMoreBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const serviceKey = this.dataset.service;
-            if (serviceContent[serviceKey]) {
-                document.getElementById('modal-title').textContent = serviceContent[serviceKey].title;
-                document.getElementById('modal-body').textContent = serviceContent[serviceKey].body;
-                modal.classList.add('active');
+    console.log('Modal:', modal);
+    console.log('Modal Close:', modalClose);
+    console.log('Learn More Buttons:', learnMoreBtns);
+
+    if (modal && modalClose && learnMoreBtns.length > 0) {
+        learnMoreBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Button clicked:', this.dataset.service);
+                const serviceKey = this.dataset.service;
+                if (serviceContent[serviceKey]) {
+                    document.getElementById('modal-title').textContent = serviceContent[serviceKey].title;
+                    document.getElementById('modal-body').textContent = serviceContent[serviceKey].body;
+                    modal.classList.add('active');
+                    console.log('Modal opened for:', serviceKey);
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', function() {
+            modal.classList.remove('active');
+            console.log('Modal closed');
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                console.log('Modal closed by overlay');
             }
         });
-    });
-
-    modalClose.addEventListener('click', function() {
-        modal.classList.remove('active');
-    });
-
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
-    });
+    } else {
+        console.error('Modal elements not found!');
+        console.error('Modal HTML found:', !!modal);
+        console.error('Close button found:', !!modalClose);
+        console.error('Learn More buttons found:', learnMoreBtns.length);
+    }
 
 </script>
 
