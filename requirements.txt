@@ -4,3 +4,5 @@ whitenoise>=6.0
 psycopg2-binary>=2.9
 pillow>=9.0
 djangorestframework>=3.14
+boto3>=1.26.0
+django-storages>=1.13.0
