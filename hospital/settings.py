@@ -11,31 +11,34 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import importlib.util
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+HAS_WHITENOISE = importlib.util.find_spec('whitenoise') is not None
+HAS_STORAGES = importlib.util.find_spec('storages') is not None
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zs1+3rae6$$9q5g1f@xhoh2zbi&^v+j1d$h3y5vh@6j&c@n+u0'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-local-dev-only')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
+    '.onrender.com',
     'localhost',
     '127.0.0.1',
-    'hospital-production-446a.up.railway.app',
-    '.up.railway.app',
+    
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8002',
     'http://127.0.0.1:8002',
-    'https://*.up.railway.app',
+    'https://*.onrender.com',
 ]
 
 
@@ -48,13 +51,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
-    'UNIQUE',
+    'UNIQUE.apps.UniqueConfig',
 ]
+
+if HAS_STORAGES:
+    INSTALLED_APPS.insert(6, 'storages')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,6 +66,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if HAS_WHITENOISE:
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 ROOT_URLCONF = 'hospital.urls'
 
@@ -138,12 +145,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # WhiteNoise configuration for production
-if not DEBUG:
+if not DEBUG and HAS_WHITENOISE:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # AWS S3 Configuration for Media Files (Production)
 # Only use S3 if explicitly enabled AND credentials are provided
-if not DEBUG and os.getenv('USE_S3') == 'True' and os.getenv('AWS_ACCESS_KEY_ID'):
+if not DEBUG and HAS_STORAGES and os.getenv('USE_S3') == 'True' and os.getenv('AWS_ACCESS_KEY_ID'):
     # S3 Configuration
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -152,12 +159,12 @@ if not DEBUG and os.getenv('USE_S3') == 'True' and os.getenv('AWS_ACCESS_KEY_ID'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    
+
     # S3 static settings
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
     STATIC_ROOT = 'static/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    
+
     # S3 media settings
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
