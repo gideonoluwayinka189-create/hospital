@@ -11,12 +11,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-import importlib.util
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-HAS_WHITENOISE = importlib.util.find_spec('whitenoise') is not None
-HAS_STORAGES = importlib.util.find_spec('storages') is not None
 
 
 # Quick-start development settings - unsuitable for production
@@ -54,11 +51,12 @@ INSTALLED_APPS = [
     'UNIQUE.apps.UniqueConfig',
 ]
 
-if HAS_STORAGES:
+if os.getenv('USE_S3') == 'True':
     INSTALLED_APPS.insert(6, 'storages')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,9 +64,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-if HAS_WHITENOISE:
-    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 ROOT_URLCONF = 'hospital.urls'
 
@@ -137,20 +132,26 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static' / 'assets',]
+STATICFILES_DIRS = [BASE_DIR / 'static' / 'assets']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# WhiteNoise configuration for production
-if not DEBUG and HAS_WHITENOISE:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# WhiteNoise serves the files collected into STATIC_ROOT.
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 # AWS S3 Configuration for Media Files (Production)
 # Only use S3 if explicitly enabled AND credentials are provided
-if not DEBUG and HAS_STORAGES and os.getenv('USE_S3') == 'True' and os.getenv('AWS_ACCESS_KEY_ID'):
+if not DEBUG and os.getenv('USE_S3') == 'True' and os.getenv('AWS_ACCESS_KEY_ID'):
     # S3 Configuration
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -160,14 +161,11 @@ if not DEBUG and HAS_STORAGES and os.getenv('USE_S3') == 'True' and os.getenv('A
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
-    # S3 static settings
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-    STATIC_ROOT = 'static/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-    # S3 media settings
+    # Keep static files on WhiteNoise; use S3 only for uploaded media.
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STORAGES['default'] = {
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+    }
 else:
     # Use local storage (development and production without S3 credentials)
     MEDIA_URL = '/media/'

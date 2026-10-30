@@ -18,9 +18,8 @@ COPY . .
 ENV DEBUG=False
 ENV PYTHONUNBUFFERED=1
 
-# Make the collect-static script executable and run it
-COPY collect-static.sh /app/collect-static.sh
-RUN chmod +x /app/collect-static.sh && /app/collect-static.sh
+# Collect static assets into STATIC_ROOT during the image build.
+RUN python manage.py collectstatic --noinput
 
 # Expose port
 EXPOSE 8080
